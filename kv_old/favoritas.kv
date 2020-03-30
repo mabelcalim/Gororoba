@@ -1,0 +1,88 @@
+<Favoritas>:
+    #:import isdir os.path.isdir
+    #:import os.path os
+    #:import os.path.abspath os
+    text_input: text_input
+    FloatLayout:
+        canvas:
+            Color:
+                #rgba:  0.6211,0.8906,0.9141,1
+                #rgba: 0.5, 0.7773,0.8047,1
+                rgba: 0.4922, 0.7969,0.8281,.9
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        #Image:
+        #    source: "figs/logo.png"
+        #    id: avatar_image
+        #    size_hint: 0.8, 1.1
+        #    pos_hint: {"top": 1.5, "right": 0.9}
+
+        #LabelButton:
+        #    canvas.before:
+        #        Color:
+        #            rgba: 0.4922, 0.7969,0.8281,.9
+        #        Rectangle:
+        #            size: self.size
+        #            pos: self.pos
+        #    text: "[u]esqueci a senha![/u]"
+        #    markup: True
+        #    color: (1,.9,0,1)
+        #    size_hint: .8, .1
+        #    pos_hint: {"top": .8, "right" :1.1}
+        #    #on_release: root.forgot_password(login_email)
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: 'Load'
+                on_release: root.show_load()
+            Button:
+                text: 'Save'
+                on_release: root.show_save()
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        Label:
+            #id: doces_msg
+            text: "FAVORITAS "
+            color: (1,0,.5,1)
+            size_hint: .8, .1
+            pos_hint: {"top": .3, "right" :.9}
+        FileChooserListView:
+            id: filechooser
+
+            #path: str(os.path.abspath(os.path.dirname(__file__))) + "/favoritas_S2"
+            #path: "/Users/Mabel/work/GOROROBA/favoritas_S2/"
+            path: root.path_f
+            on_selection: text_input.text =self.selection and self.selection[0] or ''
+
+        #Label:
+        #    #id: doces_msg
+        #    text: "SALGADOS"
+        #    color: (1,1,0,1)
+        #    size_hint: .8, .1
+        #    pos_hint: {"top": .3, "right" :.9}
+        #FileChooserListView:
+        #    id: filechooser_s
+        #    path: "/Users/Mabel/work/GOROROBA/favoritas/"
+        #    on_selection: text_input.text =self.selection and self.selection[0] or ''
+        TextInput:
+            id: text_input
+            size_hint_y: None
+            height: 500
+            multiline: True
+
+        BoxLayout:
+            size_hint_y: None
+            height: 100
+            Button:
+                text: "Abrir receita"
+                on_release: root.load(filechooser.path, filechooser.selection)
+            Button:
+                text: "Voltar <-"
+                on_release: app.change_screen("abertura")

@@ -1,0 +1,105 @@
+<Favoritas>:
+    #:import isdir os.path.isdir
+    #:import os.path os
+    #:import os.path.abspath os
+    text_input: text_input
+    FloatLayout:
+        canvas:
+            Color:
+                #rgba:  0.6211,0.8906,0.9141,1
+                #rgba: 0.5, 0.7773,0.8047,1
+                rgba: 0.4922, 0.7969,0.8281,.9
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        #Image:
+        #    source: "figs/logo.png"
+        #    id: avatar_image
+        #    size_hint: 0.8, 1.1
+        #    pos_hint: {"top": 1.5, "right": 0.9}
+
+        #LabelButton:
+        #    canvas.before:
+        #        Color:
+        #            rgba: 0.4922, 0.7969,0.8281,.9
+        #        Rectangle:
+        #            size: self.size
+        #            pos: self.pos
+        #    text: "[u]esqueci a senha![/u]"
+        #    markup: True
+        #    color: (1,.9,0,1)
+        #    size_hint: .8, .1
+        #    pos_hint: {"top": .8, "right" :1.1}
+        #    #on_release: root.forgot_password(login_email)
+
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "horizontal"
+        #Label:
+        #    #id: doces_msg
+        #    text: "FAVORITAS "
+        #    color: (1,0,.5,1)
+        #    size_hint: .8, .1
+        #    pos_hint: {"top": .3, "right" :.9}
+        FileChooserListView:
+            id: filechooser
+
+            #path: str(os.path.abspath(os.path.dirname(__file__))) + "/favoritas_S2"
+            #path: "/Users/Mabel/work/GOROROBA/favoritas_S2/"
+            size_hint_x:.5
+            path: root.path_f
+            on_selection: root.load(filechooser.path, filechooser.selection)
+
+        ScrollView:
+            id:scrlv
+            TextInput:
+                id: text_input
+                size_hint_x: 1.5
+                size_hint_y:None
+                height: max((len(self._lines)+1)*self.line_height,scrlv.height)
+                multiline: True
+                #text_size:self.width
+                #padding: 10,10
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        BoxLayout:
+            size_hint_y: None
+            height: 400
+            Label:
+                id: doces_msg
+                #text: "Novo nome da receita.txt aqui embaixo"
+                color: (1,0,0,1)
+                size_hint: .8, .1
+                pos_hint: {"top": .5, "right" :.9}
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        BoxLayout:
+            size_hint_y: None
+            height: 100
+            #Button:
+            #    text: "Abrir receita"
+            #    on_release: root.load(filechooser.path, filechooser.selection)
+                #on_release:app.change_screen("receitas")
+            #Button:
+            #     text: "Salvar receita modificada"
+            #     on_release: root.save(filechooser.path, text_input2.text)
+
+            TextInput:
+                id: text_input2
+                size_hint_y: None
+                height: 100
+                multiline: False
+                hint_text: "Novo nome da receita"
+            Button:
+                text: "salvar"
+                on_press: root.save(filechooser.path, text_input2.text)
+                on_release: filechooser._update_files()
+            Button:
+                text: "Voltar <-"
+                on_release: app.change_screen("abertura")

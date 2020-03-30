@@ -1,0 +1,46 @@
+<Abertura>:
+    FloatLayout:
+        canvas:
+            Color:
+                #rgba:  0.6211,0.8906,0.9141,1
+                #rgba: 0.5, 0.7773,0.8047,1
+                rgba: 0.4922, 0.7969,0.8281,.9
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        #Image:
+        #    source: "figs/kpi_logo.png"
+        #    id: avatar_image
+        #    size_hint: 0.8, 1.1
+        #    pos_hint: {"top": 1.5, "right": 0.9}
+
+        ImageButton:
+            source: "figs/salgados.png"
+            size_hint: 0.25,0.55
+            pos_hint: {"top": 1, "right" :.75}
+            on_release: app.change_screen("salgados")
+        ImageButton:
+            source: "figs/doces.png"
+            size_hint: 0.25,0.55
+            pos_hint: {"top": 1, "right" :.4}
+            on_release: app.change_screen("doces")
+        #ImageButton:
+        #    source: "figs/ingredientes.png"
+        #    size_hint: 0.25,0.55
+        #    pos_hint: {"top": .6, "right" :.6}
+        ImageButton:
+            source: "figs/favoritas.png"
+            size_hint: 0.25,0.55
+            pos_hint: {"top": .6, "right" :.6}
+            on_release: app.change_screen("favoritas")
+        ImageButton:
+            source: "figs/pet.png"
+            size_hint: 0.25,0.55
+            pos_hint: {"top": .4, "right" :.85}
+            #on_release: app.change_screen("doces")
+        ImageButton:
+            source: "figs/gororobinha.png"
+            size_hint: 0.25,0.55
+            pos_hint: {"top": .4, "right" :.4}
+            #on_release: app.change_screen("favoritas")

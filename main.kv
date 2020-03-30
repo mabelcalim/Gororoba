@@ -1,0 +1,49 @@
+#:kivy 1.0
+#:include kv/abertura.kv
+#:include kv/rodape.kv
+#:include kv/doces.kv
+#:include kv/favoritas.kv
+#:include kv/salgados.kv
+GridLayout:
+    cols: 1
+    FloatLayout:
+        GridLayout:
+            canvas:
+                Color:
+                    #rgba: 0.9961,0.5508,0,1
+                    rgba: 0.5, 0.7773,0.8047,1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            rows: 1
+            pos_hint: {"top": 1, "left": 1}
+            size_hint: 1, .1
+
+            Image:
+                source: "figs/mauro_logo.png"
+                size_hint: 0.25,0.55
+                pos_hint: {"top": 1, "right": 0.45}
+            Image:
+                source: "figs/mabel_logo.png"
+                size_hint: 0.25, 0.55
+                pos_hint: {"top": 1, "right": 0.8}
+            Image:
+                size_hint: 0.25,0.55
+                source: "figs/kpi_logo.png"
+
+        ScreenManager:
+            size_hint: 1, 0.899
+            pos_hint: {"top": .899, "left": 1}
+            id: screen_manager
+            Abertura:
+                name: "abertura"
+                id: abertura
+            Doces:
+                name: "doces"
+                id: doces
+            Salgados:
+                name: "salgados"
+                id: salgados
+            Favoritas:
+                name: "favoritas"
+                id: favoritas

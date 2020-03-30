@@ -1,4 +1,4 @@
-#encondings: latin-1
+#encondings: utf-8
 # -*- coding: utf-8 -*-
 __author__ = 'Mabel'
 
@@ -77,12 +77,12 @@ class Salgados(Screen):
         #self.dismiss_popup()
 
     def save(self, path, filename):
-        if self.ids['text_input2'].text == '':
-            self.ids['doces_msg'].text = " Atenção, dê um nome para receita modificada aqui embaixo. Ex: nova_receita.txt"
-        else:
-            with open(os.path.join(path, filename), 'w') as stream:
-                stream.write(self.text_input.text)
-            self.ids['doces_msg'].text = "Sua receita foi salva com sucesso!"
+        #if self.ids['text_input2'].text == '':
+        #    self.ids['doces_msg'].text = " Atenção, dê um nome para receita modificada aqui embaixo. Ex: nova_receita.txt"
+        #else:
+        with open(os.path.join(path, filename), 'w') as stream:
+            stream.write(filename[0][33::])
+        self.ids['doces_msg'].text = "Sua receita foi salva com sucesso!"
 
         #self.dismiss_popup()
 
@@ -116,20 +116,31 @@ class Doces(Screen):
         print (path_d)
         with open(os.path.join(path_d, filename[0])) as stream:
             self.text_input.text = stream.read()
+        print(filename[0][33::])
 
 
         #self.dismiss_popup()
 
     def save(self, path, filename):
-        if self.ids['text_input2'].text == '':
-            self.ids['doces_msg'].text = " Atenção, dê um nome para receita modificada aqui embaixo. Ex: nova_receita.txt"
-        else:
-            with open(os.path.join(path, filename), 'w') as stream:
-                stream.write(self.text_input.text)
-            self.ids['doces_msg'].text = "Sua receita foi salva com sucesso!"
+        #if self.ids['text_input2'].text == '':
+        #    self.ids['doces_msg'].text = " Atenção, dê um nome para receita modificada aqui embaixo. Ex: nova_receita.txt"
+        #else:
+        with open(os.path.join(path, filename), 'w') as stream:
+            stream.write(filename[0][33::])
+        self.ids['doces_msg'].text = "Sua receita foi salva com sucesso!"
 
         #self.dismiss_popup()
 
+    def change_scroll_y(self, ti, scrlv):
+        y_cursor = ti.cursor_pos[1]
+        y_bar = scrlv.scroll_y * (ti.height-scrlv.height)
+        if ti.height > scrlv.height:
+            if y_cursor >= y_bar + scrlv.height:
+                    dy = y_cursor - (y_bar + scrlv.height)
+                    scrlv.scroll_y = scrlv.scroll_y + scrlv.convert_distance_to_scroll(0, dy)[1]
+            if y_cursor - ti.line_height <= y_bar:
+                    dy = (y_cursor - ti.line_height) - y_bar
+                    scrlv.scroll_y = scrlv.scroll_y + scrlv.convert_distance_to_scroll(0, dy)[1]
 class Favoritas(Screen):
     loadfile = ObjectProperty(None)
     savefile = ObjectProperty(None)

@@ -1,5 +1,6 @@
 <Salgados>:
     text_input: text_input
+
     FloatLayout:
         canvas:
             Color:
@@ -11,24 +12,36 @@
                 pos: self.pos
 
 
-
-
     BoxLayout:
         size: root.size
         pos: root.pos
         orientation: "horizontal"
+
         FileChooserListView:
             id: filechooser
-            path: root.path_s
-            path_f: root.path_f
+
+            #path: "/Users/Mabel/work/GOROROBA/doces/"
+            #path_f: "/Users/Mabel/work/GOROROBA/favoritas_S2/"
+            path: root.path_d
+            pfav: root.path_f
+            #on_selection: text_input.text =self.selection and self.selection[0] or ''
             on_selection: root.load(filechooser.path, filechooser.selection)
 
-
+        ScrollView:
+            id: scrlv
+            bar_width: 10
+            scroll_type: ['bars', 'content']
+            size_hint: 0.2, 0.2
+            bar_inactive_color: self.bar_color
         TextInput:
             id: text_input
-            #size_hint_y: None
+            size_hint_x: 1.5
             #height: 500
             multiline: True
+            #font_size: 23
+            height: max(self.minimum_height, scrlv.height)
+            on_cursor_row: root.change_scroll_y(text_input, scrlv)
+
     BoxLayout:
         size: root.size
         pos: root.pos
@@ -37,7 +50,7 @@
             size_hint_y: None
             height: 400
             Label:
-                id: doces_msg
+                id: sal_msg
                 #text: "Novo nome da receita.txt aqui embaixo"
                 color: (1,0,0,1)
                 size_hint: .8, .1
@@ -51,6 +64,7 @@
         BoxLayout:
             size_hint_y: None
             height: 100
+
             #Button:
             #    text: "Abrir receita"
             #    on_release: root.load(filechooser.path, filechooser.selection)
@@ -59,19 +73,23 @@
             #     text: "Salvar receita modificada"
             #     on_release: root.save(filechooser.path, text_input2.text)
 
-            TextInput:
-                id: text_input2
-                size_hint_y: None
-                height: 100
-                multiline: False
-                hint_text: "Novo nome da receita"
+            #TextInput:
+            #    id: text_input2
+            #    size_hint_y: None
+            #    height: 100
+            #    multiline: False
+            #    hint_text: "Novo nome da receita"
             Button:
                 text: "Salvar receita modificada"
-                on_press: root.save(filechooser.path, text_input2.text)
+                on_press: root.save(filechooser.path, filechooser.selection)
                 on_release: filechooser._update_files()
             Button:
                 text: "S2 adicionar a favoritas"
-                on_release: root.save(filechooser.path_f, text_input2.text)
+                on_press: root.fav( filechooser.pfav,filechooser.selection)
+                on_release: filechooser._update_files()
+            #Button:
+            #    text: "Refresh"
+            #    on_release: filechooser._update_files()
             Button:
                 text: "Voltar <-"
                 on_release: app.change_screen("abertura")

@@ -64,7 +64,7 @@
         BoxLayout:
             size_hint_y: None
             height: 100
-            
+
             #Button:
             #    text: "Abrir receita"
             #    on_release: root.load(filechooser.path, filechooser.selection)
@@ -84,9 +84,9 @@
                 on_press: root.save(filechooser.path, filechooser.selection)
                 on_release: filechooser._update_files()
 
-            #Button:
-            #    text: "Refresh"
-            #    on_release: filechooser._update_files()
+            Button:
+                text: "Refresh"
+                on_release: filechooser._update_files()
             Button:
                 text: "Voltar <-"
                 on_release: app.change_screen("abertura")

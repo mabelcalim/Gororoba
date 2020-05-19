@@ -23,7 +23,7 @@
             #path: "/Users/Mabel/work/GOROROBA/doces/"
             #path_f: "/Users/Mabel/work/GOROROBA/favoritas_S2/"
             path: root.path_d
-            path_f: root.path_f
+            pfav: root.path_f
             #on_selection: text_input.text =self.selection and self.selection[0] or ''
             on_selection: root.load(filechooser.path, filechooser.selection)
 
@@ -64,6 +64,7 @@
         BoxLayout:
             size_hint_y: None
             height: 100
+
             #Button:
             #    text: "Abrir receita"
             #    on_release: root.load(filechooser.path, filechooser.selection)
@@ -80,11 +81,12 @@
             #    hint_text: "Novo nome da receita"
             Button:
                 text: "Salvar receita modificada"
-                on_press: root.save(filechooser.path, filechooser.selection[0][33::])
+                on_press: root.save(filechooser.path, filechooser.selection)
                 on_release: filechooser._update_files()
             Button:
                 text: "S2 adicionar a favoritas"
-                on_release: root.save(filechooser.path_f, filechooser.selection[0][33::])
+                on_press: root.fav( filechooser.pfav,filechooser.selection)
+                on_release: filechooser._update_files()
             #Button:
             #    text: "Refresh"
             #    on_release: filechooser._update_files()

@@ -36,7 +36,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy
+requirements = python3,kivy,openssl
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -52,7 +52,7 @@ presplash.filename = %(source.dir)s/figs/kpi_logo.png
 icon.filename = %(source.dir)s/figs/kpi_logo.png
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
-orientation = landscape
+orientation = all
 
 # (list) List of service to declare
 #services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
@@ -106,7 +106,7 @@ android.api = 29
 #android.private_storage = True
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
-#android.ndk_path =
+android.ndk_path = /home/mabel/code/android-ndk-r21
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
 android.sdk_path = /home/mabel/code/SDK
@@ -212,7 +212,7 @@ android.arch = armeabi-v7a
 #p4a.branch = master
 
 # (str) python-for-android git clone directory (if empty, it will be automatically cloned from github)
-#p4a.source_dir =
+#p4a.source_dir = 
 
 # (str) The directory in which python-for-android should look for your own build recipes (if any)
 #p4a.local_recipes =
